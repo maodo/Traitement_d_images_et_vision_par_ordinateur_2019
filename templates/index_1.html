@@ -1,0 +1,161 @@
+<script src="../static/scripts.js"></script>
+<link rel="stylesheet" type="text/css" href="../static/style.css">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+
+
+<!-- Tabs -->
+<section id="tabs">
+  <div class="container">
+    <h6 class="section-title h1">Projet du groupe 5</h6>
+    <div class="row">
+      <div class="col-xs-12 ">
+        <nav>
+          <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Cartooning Effect</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Seuillage(Thresholding)</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Détection de contours</a>
+            <a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Analyse d'image</a>
+          </div>
+        </nav>
+<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+
+<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+  <p class="text-justify font-italic font-weight-bold" >Le cartooning effect consiste à transformer une image ou une vidéo en bande déssinées en utilisant un ensemble de techniques de traitement d'images tels que le detection de contours etc. </p>
+<form method="POST" enctype="multipart/form-data" action="/cartoon">
+<div class="file-upload">
+  <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Ajouter une image</button>
+
+  <div class="image-upload-wrap">
+    <input class="file-upload-input" type='file' name="file" onchange="readURL(this);" accept="image/*" />
+    <div class="drag-text">
+      <h3>Glissez-déposez un fichier ou sélectionnez Ajouter une image.</h3>
+    </div>
+  </div>
+  <div class="file-upload-content">
+    <img class="file-upload-image" src="#" alt="your image" />
+    <div class="image-title-wrap">
+      <button type="submit" class="remove-image">Cartooner <span class="image-title">Charger Image</span></button>
+    </div>
+  </div>
+</div>
+</form>
+{% if result  %}
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-8  offset-lg-2">
+              <img src="data:image/png;base64,{{ result }}" width="100%">
+          </div>
+      </div>
+  </div>
+  {% endif %}
+</div>
+          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <p class="text-justify font-italic font-weight-bold" >Le seuillage d'image est la méthode la plus simple de segmentation d'image. À partir d'une image en niveau de gris, le seuillage d'image peut être utilisé pour créer une image comportant uniquement deux valeurs, noir ou blanc (monochrome)1.
+
+Le seuillage d'image remplace un à un les pixels d'une image à l'aide d'une valeur seuil fixée (par exemple 123). Ainsi, si un pixel à une valeur supérieure au seuil (par exemple 150), il prendra la valeur 255 (blanc), et si sa valeur est inférieure (par exemple 100), il prendra la valeur 0 (noir)</p> 
+<form method="POST" enctype="multipart/form-data" action="/threshold">
+<div class="file-upload">
+  <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Ajouter une image</button>
+
+  <div class="image-upload-wrap">
+    <input class="file-upload-input" type='file' name="file" onchange="readURL(this);" accept="image/*" />
+    <div class="drag-text">
+      <h3>Glissez-déposez un fichier ou sélectionnez Ajouter une image.</h3>
+    </div>
+  </div>
+  <div class="file-upload-content">
+    <img class="file-upload-image" src="#" alt="your image" />
+    <div class="image-title-wrap">
+      <button type="submit" class="remove-image">Seuillage <span class="image-title">Charger Image</span></button>
+    </div>
+  </div>
+</div>
+</form>
+{% if result1  %}
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-8  offset-lg-2">
+              <img src="data:image/png;base64,{{ result1 }}" width="100%">
+          </div>
+      </div>
+  </div>
+  {% endif %}
+          
+</div>
+          <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+            <p class="text-justify font-italic font-weight-bold" > En traitement d'image et en vision par ordinateur, on appelle détection de contours les procédés permettant de repérer les points d'une image matricielle qui correspondent à un changement brutal de l'intensité lumineuse
+</p>
+            <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">Type de filtre</h5>
+            <form class="form-signin" action="/video_feed" method="POST">
+              <div class="form-label-group">
+                <!-- <input type="text" name="type_filtre" id="inputEmail" class="form-control" placeholder="Nom du filtre" required autofocus> -->
+                <input list="browsers" name="type_filtre" id="inputEmail" class="form-control">
+                <datalist id="browsers">
+                  <option value="canny">
+                  <option value="sobelx">
+                  <option value="sobely">
+                  <option value="laplacien">
+                </datalist>
+              </div><br>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Envoyer</button>
+              <hr class="my-4">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+          <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+            <p class="text-justify font-italic font-weight-bold" >L'analyse d'image consiste à extraire des informations significatives à partir d'images. principalement à partir d'images numériques au moyen de techniques de traitement d'images numériques. [1] Les tâches d'analyse d'images peuvent être aussi simples que la lecture d'étiquettes à codes-barres ou sophistiquées comme l'identification d'une personne à partir de son visage.
+
+Les ordinateurs sont indispensables pour l'analyse de grandes quantités de données, pour des tâches nécessitant des calculs complexes ou pour l'extraction d'informations quantitatives. D'autre part, le cortex visuel humain est un excellent appareil d'analyse d'images, en particulier pour l'extraction d'informations de haut niveau. Pour de nombreuses applications, notamment la médecine, la sécurité et la télédétection, les analystes humains ne peuvent toujours pas être remplacés par des ordinateurs. Pour cette raison, de nombreux outils d’analyse d’images importants tels que les détecteurs de bords et les réseaux de neurones s’inspirent des modèles de perception visuelle humaine.</p>
+            <form method="POST" enctype="multipart/form-data" action="/analyser">
+<div class="file-upload">
+  <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Ajouter une image</button>
+
+  <div class="image-upload-wrap">
+    <input class="file-upload-input" type='file' name="file" onchange="readURL(this);" accept="image/*" />
+    <div class="drag-text">
+      <h3>Glissez-déposez un fichier ou sélectionnez Ajouter une image.</h3>
+    </div>
+  </div>
+  <div class="file-upload-content">
+    <img class="file-upload-image" src="#" alt="your image" />
+    <div class="image-title-wrap">
+      <button type="submit" class="remove-image">Analyser <span class="image-title">Charger Image</span></button>
+    </div>
+  </div>
+</div>
+</form>
+{% if result2  %}
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-8  offset-lg-2">
+              <h3 class="mt-5">{{ result2 }}</h3>
+              <img src="data:image/png;base64,{{ result3 }}" width="100%">
+          </div>
+      </div>
+  </div>
+  {% endif %}
+          </div>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ./Tabs -->
